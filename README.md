@@ -1,3 +1,4 @@
+# VS Code for the Web
 source .venv/bin/activate
 deactivate
 pip install -r requirements.txt
