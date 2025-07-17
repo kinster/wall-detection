@@ -1,25 +1,14 @@
-import azure.functions as func
-import datetime
+import os
 import json
 import logging
-import os
+import azure.functions as func
 
 from LegendDetector import extract_wall_codes
 
-app = func.FunctionApp()
+app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
-# @legend_router.post("/detect")
-# async def detect(request: Request):
-#     data = await request.json()
-#     base64_img = data["base64"]
-#     endpoint = os.environ["AZURE_DI_ENDPOINT"]
-#     key = os.environ["AZURE_DI_KEY"]
-#     wall_codes = extract_wall_codes(base64_img, endpoint, key)
-#     return {"wallCodes": wall_codes}
-
-
-
-@app.route(route="legend/detector", auth_level=func.AuthLevel.ANONYMOUS)
+@app.function_name(name="legenddetector")
+@app.route(route="legenddetector", methods=["POST"])
 def Detector(req: func.HttpRequest) -> func.HttpResponse:
     try:
 
